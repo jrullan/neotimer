@@ -10,12 +10,13 @@ class Neotimer{
     ~Neotimer();            //Destructor
     void init();            //Initializations
     boolean done();         //Indicates time has elapsed
-    boolean wait(long _t);  //Indicates time has elapsed
+    boolean repeat(long _t);  //Indicates time has elapsed
+    boolean waiting();
+    void start();			//Starts a timer
+    long stop();			//Stops a timer and returns elapsed time
     void reset();           //Resets timer to zero
     void set(long t);
-    void start();
-    void stop();
-    boolean waiting();
+
     
   private:
 
@@ -44,9 +45,6 @@ Neotimer::~Neotimer(){
 void Neotimer::init(){
   this->_waiting = false;
 }
-
-
-// Timer utilities functions
 
 /*
  * Repeats a timer continuosly
@@ -111,9 +109,10 @@ void Neotimer::start(){
 /*
  * Stops a timer
  */
-void Neotimer::stop(){
+long Neotimer::stop(){
   this->_timer.started = false;
   this->_waiting = false;
+  return millis()-this->_timer.last;
 }
 
 /*
