@@ -1,5 +1,7 @@
 # neotimer
-Non blocking timer class for Arduino. Developed originally for use in the Udoo Neo as an experiment. 
+Non blocking timer class for Arduino. 
+
+When you use a delay() function in an Arduino sketch, the processor stops everything it is doing until this delay is completed. That is called a blocking delay, because it blocks the processor until it finishes. Many times we don't want this to happen. This timer provides a way to use time delays without blocking the processor, so it can do other things while the timer ends up. This is called a non-blocking delay timer.
 
 The timer provides basic functionality to implement different ways of timing in a sketch. There are two main ways to use the timer, first as a Start-Stop-Reset timer.
 
