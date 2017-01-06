@@ -1,7 +1,7 @@
-Neotimer  KEYWORD1
-start     KEYWORD2
-stop      KEYWORD2
-reset     KEYWORD2
-done      KEYWORD2
-waiting   KEYWORD2
-repeat    KEYWORD2
+Neotimer	KEYWORD1
+start	KEYWORD2
+stop	KEYWORD2
+reset	KEYWORD2
+done	KEYWORD2
+waiting	KEYWORD2
+repeat	KEYWORD2
