@@ -11,7 +11,8 @@ class Neotimer{
     void init();            //Initializations
     boolean done();         //Indicates time has elapsed
     boolean repeat(long _t);  //Indicates time has elapsed
-    boolean waiting();
+    boolean waiting();			// Indicates timer is started but not finished
+    boolean started();			// Indicates timer has started
     void start();			//Starts a timer
     long stop();			//Stops a timer and returns elapsed time
     void reset();           //Resets timer to zero
@@ -120,7 +121,11 @@ long Neotimer::stop(){
  * but has not yet finished.
  */
 boolean Neotimer::waiting(){
-  return this->_waiting;
+  return (this->_timer.started && !this->done()) ? true : false;
+}
+
+boolean Neotimer::started(){
+	return this->_timer.started;
 }
 
 #endif
