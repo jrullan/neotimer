@@ -59,7 +59,7 @@ There are three variants for your convenience:
 ```c++ 
 repeat()
 ``` 
-In this mode it will repeat indefinitely times. The timer's preset is set using set(long t).
+In this mode it will repeat indefinitely times. The timer's preset is set using `set(long t)`.
 
 ```c++
 void setup(){
@@ -78,7 +78,7 @@ void loop(){
 ```c++ 
 repeat(int times)
 ``` 
-In this mode you specify the times that it should repeat a task. The delay is specified by setting the timer's preset with set(long t).
+In this mode you specify the times that it should repeat a task. The delay is specified by setting the timer's preset with `set(long t)`.
 
 ```c++
 void setup(){
@@ -97,7 +97,7 @@ void loop(){
 ```c++ 
 repeat(int times, long t)
 ``` 
-In this mode you specify the times that it should repeat a task and the delay at the same time. No need to set the timer's preset using set(long t).
+In this mode you specify the times that it should repeat a task and the delay at the same time. **No need to set the timer's preset using `set(long t)`**.
 
 ```c++
 void loop(){
@@ -105,5 +105,48 @@ void loop(){
     Serial.println("Calling this 10 times in 2 seconds intervals");
     digitalWrite(D13,!digitalRead(D13)); // Let's blink each two seconds
   }
+}
+```
+
+#### Using `repeatReset()`
+If you are using the repeat mode, after it repeats the call the amount of times set, the timer will stop repeating. If you want to restart it you can call `repeatReset()` to reset the timer's counter and start counting again. In the example below, when the repeat has been called 10 times it will stop until the user presses the button wired to D5. Once pressed the timer's counter is reset and it starts again for 10 times.
+
+```c++
+#include <neotimer.h>
+
+Neotimer mytimer = Neotimer(1000); // Set timer's preset to 1s
+
+int count = 0;
+const int BTN1 = 5;
+const int LED = 13;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(BTN1,INPUT);
+  pinMode(LED,OUTPUT);
+}
+
+void loop(){
+  
+  if(mytimer.repeat(10)){
+    
+    digitalWrite(LED,!digitalRead(LED)); // Let's blink each second
+
+    Serial.print("Calling this ");
+    Serial.print(++count);
+    Serial.print(" times: LED is ");    
+    if(digitalRead(LED)){ 
+      Serial.println("ON");
+    }else{
+      Serial.println("OFF");
+    }
+
+  }
+
+  if(digitalRead(BTN1) == HIGH){   
+    mytimer.repeatReset(); // If a button is pressed reset the repeat counter
+    count=0;
+  }
+
 }
 ```
