@@ -48,12 +48,61 @@ void loop(){
 ```
 
 ### Repeat mode
-A convenient way to use the timer is to use the repeat(delay) mode. In this mode you specify the delay in the repeat() call and it will return true when done, and false if it isn't done. It automatically resets so it is a good way to repeat some task periodically. Remember, it is non-blocking so the program will skip the code when the timer is not done.
+A convenient way to use the timer is to use the `repeat()` mode. This mode let's you repeat some code periodically X amount of times. The interval is set with the timer's `set(long t)` method. Once repeat has been called X times, it will not return true again, unless `repeatReset()` is called. The typical usage is inside an `if()` clause.
+
+If no argument is given to repeat, it will repeat the code unlimited amount of times.
+
+Remember, it is non-blocking so the program will skip the code when the timer is not done.
+There are three variants for your convenience:
+
+#### Variant 1
+```c++ 
+repeat()
+``` 
+In this mode it will repeat indefinitely times. The timer's preset is set using set(long t).
+
+```c++
+void setup(){
+  mytimer.set(2000); // Sets the timer preset to 2 second intervals
+}
+
+void loop(){
+  if(mytimer.repeat()){
+    Serial.println("Calling this indefinitely every 2 seconds!");
+    digitalWrite(D13,!digitalRead(D13)); // Let's blink each two seconds
+  }
+}
+```
+
+#### Variant 2
+```c++ 
+repeat(int times)
+``` 
+In this mode you specify the times that it should repeat a task. The delay is specified by setting the timer's preset with set(long t).
+
+```c++
+void setup(){
+  mytimer.set(2000); // Sets the timer preset to 2 second intervals
+}
+
+void loop(){
+  if(mytimer.repeat(10)){
+    Serial.println("Calling this 10 times in 2 seconds intervals");
+    digitalWrite(D13,!digitalRead(D13)); // Let's blink each two seconds
+  }
+}
+```
+
+#### Variant 3
+```c++ 
+repeat(int times, long t)
+``` 
+In this mode you specify the times that it should repeat a task and the delay at the same time. No need to set the timer's preset using set(long t).
 
 ```c++
 void loop(){
-  if(mytimer.repeat(2000)){
-    Serial.println("Calling this periodically each two seconds");
+  if(mytimer.repeat(10,2000)){
+    Serial.println("Calling this 10 times in 2 seconds intervals");
     digitalWrite(D13,!digitalRead(D13)); // Let's blink each two seconds
   }
 }
