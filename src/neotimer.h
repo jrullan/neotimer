@@ -11,23 +11,25 @@ class Neotimer{
   public:
     //Methods
 		Neotimer();
-    Neotimer(long _t);      //Constructor
-    ~Neotimer();            //Destructor
+  	Neotimer(long _t);      //Constructor
+  	~Neotimer();            //Destructor
 		
-    void init();            //Initializations
-    boolean done();         //Indicates time has elapsed
-    boolean repeat(int times);
+  	void init();            //Initializations
+  	boolean done();         //Indicates time has elapsed
+  	boolean repeat(int times);
 		boolean repeat(int times, long _t);
 		boolean repeat();
 		void repeatReset();
 		boolean waiting();			// Indicates timer is started but not finished
-    boolean started();			// Indicates timer has started
-    void start();			//Starts a timer
-    long stop();			//Stops a timer and returns elapsed time
-    void restart();
-    void reset();           //Resets timer to zero
-    void set(long t);
+  	boolean started();			// Indicates timer has started
+  	void start();			//Starts a timer
+  	long stop();			//Stops a timer and returns elapsed time
+  	void restart();
+  	void reset();           //Resets timer to zero
+  	void set(long t);
 
+		int repetitions = NEOTIMER_UNLIMITED;
+	
   private:
 
     typedef struct myTimer{
@@ -39,7 +41,6 @@ class Neotimer{
 
     struct myTimer _timer;
     boolean _waiting;
-		int _times = NEOTIMER_UNLIMITED;
 };
 
 //Default constructor
@@ -72,16 +73,16 @@ void Neotimer::init(){
 boolean Neotimer::repeat(int times){
 	if(times != NEOTIMER_UNLIMITED){	
 		// First repeat
-		if(this->_times == NEOTIMER_UNLIMITED){
-			this->_times = times;			
+		if(this->repetitions == NEOTIMER_UNLIMITED){
+			this->repetitions = times;			
 		}
 		// Stop
-		if(this->_times == 0){
+		if(this->repetitions == 0){
 			return false;
 		}
 		
 		if(this->repeat()){
-			this->_times--;
+			this->repetitions--;
 			return true;
 		}
 		return false;
@@ -124,7 +125,7 @@ boolean Neotimer::repeat(){
 }
 
 void Neotimer::repeatReset(){
-	this->_times = -1;
+	this->repetitions = -1;
 }
 
 /*
