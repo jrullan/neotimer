@@ -27,7 +27,7 @@ class Neotimer{
 	void restart();
 	void reset();           //Resets timer to zero
 	void set(long t);
-
+	long get();
 	int repetitions = NEOTIMER_UNLIMITED;
 	
 	private:
