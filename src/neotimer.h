@@ -28,6 +28,7 @@ class Neotimer{
 	void reset();           //Resets timer to zero
 	void set(long t);
 	long get();
+	boolean debounce(boolean signal);
 	int repetitions = NEOTIMER_UNLIMITED;
 	
 	private:
@@ -154,6 +155,19 @@ void Neotimer::set(long t){
  */
 long Neotimer::get(){
 	return this->_timer.time;
+}
+
+/*
+ * Returns the debounced value of signal
+ * This is very useful to avoid "bouncing"
+ * of electromechanical signals
+ */
+boolean Neotimer::debounce(boolean signal){
+	if(this->done() && signal){
+		this->start();
+		return true;
+	}
+	return false;
 }
 
 /*
