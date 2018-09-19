@@ -6,3 +6,4 @@ reset	KEYWORD2
 done	KEYWORD2
 waiting	KEYWORD2
 repeat	KEYWORD2
+debounce  KEYWORD2
