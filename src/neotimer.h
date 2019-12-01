@@ -33,7 +33,7 @@ class Neotimer{
 
 	private:
 
-	typedef struct myTimer{
+	struct myTimer{
 		unsigned long time;
 		unsigned long last;
 		boolean done;
