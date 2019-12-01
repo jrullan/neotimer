@@ -11,31 +11,31 @@ class Neotimer{
 	public:
 	//Methods
 	Neotimer();
-	Neotimer(long _t);      //Constructor
+	Neotimer(unsigned long _t);      //Constructor
 	~Neotimer();            //Destructor
-		
+
 	void init();            //Initializations
 	boolean done();         //Indicates time has elapsed
 	boolean repeat(int times);
-	boolean repeat(int times, long _t);
+	boolean repeat(int times, unsigned long _t);
 	boolean repeat();
 	void repeatReset();
 	boolean waiting();			// Indicates timer is started but not finished
 	boolean started();			// Indicates timer has started
 	void start();			//Starts a timer
-	long stop();			//Stops a timer and returns elapsed time
+	unsigned long stop();			//Stops a timer and returns elapsed time
 	void restart();
 	void reset();           //Resets timer to zero
-	void set(long t);
-	long get();
+	void set(unsigned long t);
+	unsigned long get();
 	boolean debounce(boolean signal);
 	int repetitions = NEOTIMER_UNLIMITED;
-	
+
 	private:
 
 	typedef struct myTimer{
-		long time;
-		long last;
+		unsigned long time;
+		unsigned long last;
 		boolean done;
 		boolean started;
 	};
@@ -49,13 +49,13 @@ Neotimer::Neotimer(){
 	this->_timer.time = 1000; //Default 1 second interval if not specified
 }
 
-Neotimer::Neotimer(long _t){
+Neotimer::Neotimer(unsigned long _t){
   this->_timer.time = _t;
 }
 
 //Default destructor
 Neotimer::~Neotimer(){
-  
+
 }
 
 //Initializations
@@ -66,22 +66,22 @@ void Neotimer::init(){
 /*
  * Repeats a timer x times
  * Useful to execute a task periodically.
- * Usage: 
+ * Usage:
  * if(timer.repeat(10)){
  * 	  do something 10 times, every second (default)
  * }
  */
 boolean Neotimer::repeat(int times){
-	if(times != NEOTIMER_UNLIMITED){	
+	if(times != NEOTIMER_UNLIMITED){
 		// First repeat
 		if(this->repetitions == NEOTIMER_UNLIMITED){
-			this->repetitions = times;			
+			this->repetitions = times;
 		}
 		// Stop
 		if(this->repetitions == 0){
 			return false;
 		}
-		
+
 		if(this->repeat()){
 			this->repetitions--;
 			return true;
@@ -94,12 +94,12 @@ boolean Neotimer::repeat(int times){
 /*
  * Repeats a timer x times with a defined period
  * Useful to execute a task periodically.
- * Usage: 
+ * Usage:
  * if(timer.repeat(10,5000)){
  * 	  do something 10 times, every 5 seconds
  * }
  */
-boolean Neotimer::repeat(int times, long _t){
+boolean Neotimer::repeat(int times, unsigned long _t){
 	this->_timer.time = _t;
 	return this->repeat(times);
 }
@@ -107,7 +107,7 @@ boolean Neotimer::repeat(int times, long _t){
 /*
  * Repeats a timer indefinetely
  * Useful to execute a task periodically.
- * Usage: 
+ * Usage:
  * if(timer.repeat()){
  * 	  do something indefinetely, every second (default)
  * }
@@ -116,13 +116,13 @@ boolean Neotimer::repeat(){
   if(this->done()){
     this->reset();
     return true;
-  }  
+  }
 	if(!this->_timer.started){
 		this->_timer.last = millis();
 		this->_timer.started = true;
     this->_waiting = true;
-  }	
-  return false;	
+  }
+  return false;
 }
 
 void Neotimer::repeatReset(){
@@ -146,14 +146,14 @@ boolean Neotimer::done(){
 /*
  * Sets a timer preset
  */
-void Neotimer::set(long t){
+void Neotimer::set(unsigned long t){
   this->_timer.time = t;
 }
 
 /*
  * Gets the timer preset
  */
-long Neotimer::get(){
+unsigned long Neotimer::get(){
 	return this->_timer.time;
 }
 
@@ -191,7 +191,7 @@ void Neotimer::start(){
 /*
  * Stops a timer
  */
-long Neotimer::stop(){
+unsigned long Neotimer::stop(){
   this->_timer.started = false;
   this->_waiting = false;
   return millis()-this->_timer.last;
