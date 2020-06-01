@@ -20,10 +20,11 @@ class Neotimer{
 	boolean repeat(int times, unsigned long _t);
 	boolean repeat();
 	void repeatReset();
-	boolean waiting();			// Indicates timer is started but not finished
-	boolean started();			// Indicates timer has started
+	boolean waiting();		// Indicates timer is started but not finished
+	boolean started();		// Indicates timer has started
 	void start();			//Starts a timer
-	unsigned long stop();			//Stops a timer and returns elapsed time
+	unsigned long stop();	//Stops a timer and returns elapsed time
+	unsigned long getEllapsed();	// Gets the ellapsed time
 	void restart();
 	void reset();           //Resets timer to zero
 	void set(unsigned long t);
@@ -194,6 +195,13 @@ void Neotimer::start(){
 unsigned long Neotimer::stop(){
   this->_timer.started = false;
   this->_waiting = false;
+  return this->getEllapsed();
+}
+
+/*
+ * Gets ellapsed time
+ */
+unsigned long Neotimer::getEllapsed(){
   return millis()-this->_timer.last;
 }
 
