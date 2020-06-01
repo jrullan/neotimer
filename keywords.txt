@@ -7,3 +7,6 @@ done	KEYWORD2
 waiting	KEYWORD2
 repeat	KEYWORD2
 debounce  KEYWORD2
+get	KEYWORD2
+set	KEYWORD2
+getEllapsed	KEYWORD2
