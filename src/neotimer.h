@@ -24,7 +24,7 @@ class Neotimer{
 	boolean started();		// Indicates timer has started
 	void start();			//Starts a timer
 	unsigned long stop();	//Stops a timer and returns elapsed time
-	unsigned long getEllapsed();	// Gets the ellapsed time
+	unsigned long getElapsed();	// Gets the elapsed time
 	void restart();
 	void reset();           //Resets timer to zero
 	void set(unsigned long t);
@@ -195,13 +195,13 @@ void Neotimer::start(){
 unsigned long Neotimer::stop(){
   this->_timer.started = false;
   this->_waiting = false;
-  return this->getEllapsed();
+  return this->getElapsed();
 }
 
 /*
- * Gets ellapsed time
+ * Gets elapsed time
  */
-unsigned long Neotimer::getEllapsed(){
+unsigned long Neotimer::getElapsed(){
   return millis()-this->_timer.last;
 }
 
