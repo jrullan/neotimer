@@ -9,4 +9,4 @@ repeat	KEYWORD2
 debounce  KEYWORD2
 get	KEYWORD2
 set	KEYWORD2
-getEllapsed	KEYWORD2
+getElapsed	KEYWORD2
